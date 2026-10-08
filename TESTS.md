@@ -1,5 +1,7 @@
 # AI Tells — Tests
 
+> Note, 2026-10-08: these tests were written for AI Tells 1.1.0. They have not yet been rerun against Human AI Tells 2.0.0.
+
 These tests are the minimum acceptance and regression set for v1.1.0.
 
 ## 1. WRITE mode prevents tells silently

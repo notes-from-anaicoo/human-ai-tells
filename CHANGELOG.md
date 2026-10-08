@@ -2,6 +2,23 @@
 
 All notable changes to AI Tells are documented here.
 
+## [2.0.0] - 2026-10-08
+
+AI Tells is now Human AI Tells, with the description line "AI tells with humanizer".
+
+### Changed
+
+- Merged a humanizer pattern set into AI Tells and renamed the project.
+- Added patterns: arguing with no one, one-line closers, sayings that sound deep, staged run-ups, repeated openings, writing about the document instead of its subject, replies written for the wrong reader, and guesses past the writer's knowledge.
+- Added a mark, draft, check workflow and a list of cases where the rules should not act.
+- Added `human-ai-tells.md`, a plain Markdown edition with no tool-specific syntax, for use in any chat or tool.
+- Added `NOTICE.md` crediting the sources and reproducing their licences.
+- Detect mode is still the default: it reports and changes nothing unless asked to rewrite.
+
+### Tests
+
+- `TESTS.md` was written for 1.1.0 and has not yet been rerun against 2.0.0.
+
 ## [1.1.0] — 2026-09-25
 
 ### Added

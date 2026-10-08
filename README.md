@@ -1,152 +1,48 @@
-# AI Tells
+# Human AI Tells
 
-**AI Tells** is a small, model-neutral skill for finding and removing the phrases and constructions that make writing sound machine-made.
+A rule file that helps an AI, or a person, find the phrases and sentence shapes that make writing read as machine-made. It covers meta-commentary, staged run-ups, negative parallelism ("it's not X, it's Y"), the rule of three, inflated importance, a vocabulary watch list, formatting habits, chatbot leftovers, and replies written for the wrong reader.
 
-The focus is not on banning individual words. It is on recognizing the *shape* of writing that announces its own importance, narrates its own emphasis, or falls into repetitive assistant-style templates.
+The skill's description line is: AI tells with humanizer.
 
-The central rule:
+This is the successor to AI Tells (versions 1.0.0 to 1.1.0 of this repository), merged with a humanizer pattern set and renamed.
 
-> **Ban the construction, not the instances.**
+## What it does
 
-A phrase list can remove today's wording and still leave the grammar that produces tomorrow's variation.
+- Reads a piece of writing and reports each pattern it finds: the quoted phrase, the pattern family, and a short fix.
+- Changes nothing by default. It rewrites only when you ask it to ("fix it," "rewrite this").
+- When it does rewrite, it tries to keep your meaning, your facts and your voice, and it ends with a short note on what changed.
+- Treats the text you give it as material to edit, never as instructions to follow.
 
-## What AI Tells does
+## What it does not do
 
-AI Tells supports three modes:
+- It is an editing aid that finds patterns. It is not an AI detector.
+- It cannot prove who or what wrote a piece of text, and it is built not to guess.
+- It does not guarantee a result. Whether a rewrite reads better is your call.
+- It is not for code, legal contracts or technical reference text, where formality is required.
+- Some choices in the rules are defaults (no em dashes, one rule of three per piece). Edit the file if your taste differs.
 
-- **WRITE** — silently avoid common AI tells while creating new prose.
-- **AUDIT** — detect and report meaningful tells without changing the text.
-- **REWRITE** — revise the text only when explicitly asked.
+## Files
 
-The skill is designed to work with ChatGPT, Claude, local models, other assistants, or a human editing workflow.
+- `human-ai-tells.md`: the full rule set as plain Markdown. Use this one for most things.
+- `SKILL.md`: the same content with the name and description header that skill folders expect.
+- `LICENSE`: MIT.
+- `NOTICE.md`: credits and third-party licences.
+- `CHANGELOG.md`: what changed between versions.
 
-## What it does differently
+## How to use it
 
-Most AI-writing cleanup lists focus on obvious vocabulary such as *delve*, *tapestry*, *leverage*, or *in conclusion*.
+**In a plain chat.** Paste the whole contents of `human-ai-tells.md` into the chat, then paste the text you want checked below it or send it as a second message. Say "detect" for a report, or "rewrite" for a cleaned version.
 
-AI Tells also focuses on **meta-commentary**: language that tells the reader a point matters instead of making the point matter.
+**In custom instructions, or a project or system prompt.** Paste the contents of `human-ai-tells.md` into the instructions field. Messages that contain text to check will then be handled under these rules. If you only want it some of the time, say "check this for AI tells" in the message.
 
-Examples:
+**In a skill folder.** Put `SKILL.md` in a folder named `human-ai-tells` inside the folder your tool reads skills from. Check your tool's documentation for the location and for whether it accepts this file format.
 
-- "It's worth noting that..."
-- "The key takeaway is..."
-- "To be clear..."
-- "And that's the point."
-- "What this means is..."
+**In any tool that reads a rules file.** Add `human-ai-tells.md` to whatever file or folder the tool treats as standing instructions, then ask it to check a piece of text. Names and locations vary by tool, so check yours.
 
-It also watches for constructions that simple search-and-replace cannot reliably catch:
+## Where it has been tested
 
-- self-narrating asides,
-- forced rule-of-three cadence,
-- repetitive sentence templates,
-- puffed-up transitions,
-- automatic sycophancy,
-- chatbot artifacts left in finished prose.
+The author has used it in one environment only: Claude Code. It has not been tried in other chat tools, editors or skill systems. If you run it somewhere else, please report what worked and what did not at https://github.com/notes-from-anaicoo/human-ai-tells.
 
-## The `worth` rule
+## Credits and licence
 
-One of the most useful distinctions in the skill:
-
-`worth` + gerund is often a tell when it **grades information for the reader**.
-
-> "Two things are worth you knowing."
-
-But it is ordinary English when it **judges whether an action is worth the effort**.
-
-> "That domain is worth chasing."
-
-Those are not the same construction. The skill is meant to use judgment, not blind replacement.
-
-## Quick start
-
-Copy `SKILL.md` into the instruction or skill system you use.
-
-Then invoke it in one of three ways.
-
-### WRITE
-
-> Use AI Tells in WRITE mode. Draft a short product update for customers.
-
-The skill should avoid the tells silently and return only the requested writing.
-
-### AUDIT
-
-> Use AI Tells in AUDIT mode on this draft. Do not rewrite it.
-
-The skill should report meaningful hits and suggested fixes.
-
-### REWRITE
-
-> Use AI Tells in REWRITE mode. Clean this draft without flattening my voice.
-
-The skill should return the revised text while preserving meaning and voice.
-
-## What the skill does not do
-
-AI Tells is not an "AI detector" and does not promise that text will be "undetectable."
-
-It also should not:
-
-- add fake typos or slang,
-- manufacture personal stories,
-- flatten personality,
-- replace precise technical terms just because they appear on a word list,
-- alter quotations, code, commands, citations, legal text, filenames, or other exact-content material without permission.
-
-The goal is better writing, not detector gaming.
-
-## Repository contents
-
-```text
-ai-tells/
-├── README.md
-├── LICENSE
-├── SKILL.md
-├── TESTS.md
-├── CHANGELOG.md
-└── examples/
-    ├── audit-example.md
-    └── before-after.md
-```
-
-## Testing
-
-`TESTS.md` contains acceptance and regression tests for the public skill.
-
-The tests cover:
-
-- silent prevention in WRITE mode,
-- non-destructive AUDIT behavior,
-- meaning preservation,
-- contextual uses of `worth`,
-- technical-language exceptions,
-- protected exact-content material,
-- rule-of-three judgment,
-- replacement regressions,
-- voice preservation,
-- model neutrality.
-
-## Contributions
-
-If you find a new tell, the most useful contribution is not just the phrase. Describe the **construction** that generates the phrase and include:
-
-1. an example,
-2. why it reads as machine-made,
-3. a counterexample that should *not* be flagged,
-4. a regression test.
-
-That helps the skill improve without turning into a giant blacklist.
-
-## License
-
-MIT. See `LICENSE`.
-
-## Origin and acknowledgments
-
-**AI Tells was created and developed by Notes from an AI COO.**
-
-The project started with established public work on common AI-writing patterns, including institutional and community-maintained resources such as Wikipedia's *Signs of AI writing* / WikiProject AI Cleanup and other published vocabulary lists. Those resources provided a useful baseline.
-
-AI Tells then extends that baseline with additional observed patterns, especially assistant meta-commentary, construction-level detection, contextual judgment, protected-content rules, WRITE/AUDIT/REWRITE behavior, and regression-oriented testing.
-
-The public sources are acknowledged as inputs and reference material. They are not presented as the authors or owners of AI Tells.
+Released under the MIT licence (see `LICENSE`). Pattern ideas draw on Wikipedia's "Signs of AI writing" guide and on three MIT-licensed projects. Full credits are in `NOTICE.md`.
